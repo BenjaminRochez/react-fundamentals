@@ -12,18 +12,57 @@ import '../box-styles.css'
 
 // 🐨 add a style prop to each of them as well so their background color
 // matches what the text says it should be as well as `fontStyle: 'italic'`
-const smallBox = <div>small lightblue box</div>
-const mediumBox = <div>medium pink box</div>
-const largeBox = <div>large orange box</div>
 
-function App() {
+//- 01 - styling base
+// const smallBox = <div className="box box--small" style={{backgroundColor: 'lightblue', fontStyle: 'italic'}}>small lightblue box</div>
+// const mediumBox = <div className="box box--medium"style={{backgroundColor: 'pink', fontStyle: 'italic'}}>medium pink box</div>
+// const largeBox = <div className="box box--large"style={{backgroundColor: 'orange', fontStyle: 'italic'}}>large orange box</div>
+// function App() {
+//   return (
+//     <div>
+//       {smallBox}
+//       {mediumBox}
+//       {largeBox}
+//     </div>
+//   )
+// }
+
+//- extra 01 - create component
+
+// function Box({className, ...otherProps}){
+//   return (
+//     <div className={`box ${className}`} {...otherProps}>{content}</div>
+//   )
+// }
+
+// function App(){
+//   return (
+//     <div>
+//       <Box className="box--small" content="small lightblue box" style={{backgroundColor: 'lightblue', fontStyle: 'italic'}}/>
+//       <Box className="box--medium" content="medium pink box" style={{backgroundColor: 'pink', fontStyle: 'italic'}}/>
+//       <Box className="box--large" content="large orange box" style={{backgroundColor: 'orange', fontStyle: 'italic'}}/>
+//     </div>
+//   )
+// }
+
+//- extra 02 - add a size prop
+function Box({className = '', style='', size, ...otherProps}){
+  const sizeClassName = size ? `box--${size}` : '';
+  return (
+    <div className={`box ${className} ${sizeClassName}`} style={{fontStyle: 'italic', ...style}}  {...otherProps} />
+  )
+}
+
+function App(){
   return (
     <div>
-      {smallBox}
-      {mediumBox}
-      {largeBox}
+      <Box size="small" style={{backgroundColor: 'lightblue'}}> Small lightblue box</Box>
+      <Box size="medium" style={{backgroundColor: 'pink'}}> Medium pink box</Box>
+      <Box size="large" style={{backgroundColor: 'orange'}}> Large orange box</Box>
+      <Box size="small"> Sizeless box</Box>
     </div>
   )
 }
+
 
 export default App
